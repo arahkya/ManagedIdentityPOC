@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Azure.Identity;
+using Azure.Security.KeyVault;
+using Azure.Security.KeyVault.Secrets;
 
 namespace ManagedIdentityPOC.Controllers;
 
