@@ -20,11 +20,18 @@ public class SecretController : ControllerBase
     [Route("{vaultName}/{name}")]
     public string GetSecret(string vaultName, string name)
     {
-        SecretClient secretClient = new(new Uri($"https://{vaultName}.vault.azure.net"), new DefaultAzureCredential());
-        
-        var secretResponse = secretClient.GetSecret(name);
-        var secretValue = secretResponse.Value.Value;
+        try
+        {
+            SecretClient secretClient = new(new Uri($"https://{vaultName}.vault.azure.net"), new DefaultAzureCredential());
 
-        return secretValue;
+            var secretResponse = secretClient.GetSecret(name);
+            var secretValue = secretResponse.Value.Value;
+
+            return secretValue;
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
     }
 }
